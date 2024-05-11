@@ -19,9 +19,8 @@ export class DashboardComponent implements OnInit {
     this.http
       .get(`${environment.api_base_url}/products`)
       .subscribe((res: any) => {
-        if (res.result) {
+        if (res.length) {
           console.log('Response from Products: ', res);
-          alert('Products Fetched');
         } else {
           alert(res.message);
         }

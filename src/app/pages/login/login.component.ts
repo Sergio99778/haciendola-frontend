@@ -26,18 +26,22 @@ export class LoginComponent {
         email: this.loginObj.EmailId,
         password: this.loginObj.Password,
       })
-      .subscribe((res: any) => {
-        console.log('Response from LOGIN: ', res);
-        if (res.result) {
-          alert('Login Success');
-          localStorage.setItem(
-            environment.auth_token_local_storage_key,
-            res.data.access_token
-          );
-          this.router.navigateByUrl('/dashboard');
-        } else {
-          alert(res.message);
-        }
+      .subscribe({
+        next: (res: any) => {
+          console.log(res.access_token);
+          if (res.access_token) {
+            localStorage.setItem(
+              environment.auth_token_local_storage_key,
+              res.access_token
+            );
+            this.router.navigateByUrl('/dashboard');
+          } else {
+            alert(res.error.message);
+          }
+        },
+        error: (error) => {
+          alert('Error: ' + error.error.message);
+        },
       });
   }
 }
