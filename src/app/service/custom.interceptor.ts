@@ -1,14 +1,15 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 export const customInterceptor: HttpInterceptorFn = (req, next) => {
-  debugger;
+  const myToken = localStorage.getItem(
+    environment.auth_token_local_storage_key
+  );
 
-  const myToken = localStorage.getItem('angular17token');
-
-  const cloneRequest =  req.clone({
-    setHeaders:{
-      Authorization: `Bearer ${myToken}`
-    }
+  const cloneRequest = req.clone({
+    setHeaders: {
+      Authorization: `Bearer ${myToken}`,
+    },
   });
   return next(cloneRequest);
 };

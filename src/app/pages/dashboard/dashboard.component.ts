@@ -1,31 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-
-
-  users:any[]=[];
-  constructor(private http: HttpClient) {
-
-  }
+  users: any[] = [];
+  constructor(private http: HttpClient) {}
   ngOnInit(): void {
-    this.getAllusers();
+    this.getAllProducts();
   }
 
-  getAllusers() {
-    debugger;
-    this.http.get('https://freeapi.gerasim.in/api/User/GetAllUsers').subscribe((res:any) => {
-      this.users = res.data;
-    } , error => {
-      alert("Error From API")
-    })
+  getAllProducts() {
+    this.http
+      .get(`${environment.api_base_url}/products`)
+      .subscribe((res: any) => {
+        if (res.result) {
+          console.log('Response from Products: ', res);
+          alert('Products Fetched');
+        } else {
+          alert(res.message);
+        }
+      });
   }
-
 }
