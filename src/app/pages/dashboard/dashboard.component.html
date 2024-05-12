@@ -1,1 +1,11 @@
-<p>dashboard works!</p>
+<div class="container mt-3">
+    <button class="btn btn-success mb-3" (click)="addProduct()">Add Post</button>
+    <div *ngFor="let product of products; let i = index" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.Title }}</h5>
+        <p class="card-text">{{ product.description }}</p>
+        <button class="btn btn-primary" (click)="updateProduct(product)">Update</button>
+        <button class="btn btn-danger" (click)="deleteProduct(product.SKU)">Delete</button>
+      </div>
+    </div>
+  </div>
