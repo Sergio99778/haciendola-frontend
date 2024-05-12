@@ -12,7 +12,8 @@ import { NgFor } from '@angular/common';
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
+
   constructor(private productsService: ProductsService) {}
   ngOnInit(): void {
     this.getProducts();
@@ -67,10 +68,26 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  deleteProduct(product: Product) {
-    this.productsService.deleteProduct(product.SKU.toString()).subscribe({
+  deleteProduct(productSKU: number) {
+    this.productsService.deleteProduct(productSKU.toString()).subscribe({
       next: () => {
-        this.products = this.products.filter((p) => p.SKU !== product.SKU);
+        const productToDelete = this.products.find((p) => p.SKU === productSKU);
+
+        if (productToDelete) {
+          this.productsService
+            .deleteProduct(productToDelete.SKU.toString())
+            .subscribe({
+              next: () => {
+                this.products = this.products.filter(
+                  (p) => p.SKU !== productSKU
+                );
+              },
+              error: (error: any) => {
+                console.error('There was an error!', error);
+                alert('There was an error deleting the product');
+              },
+            });
+        }
       },
       error: (error: any) => {
         console.error('There was an error!', error);
