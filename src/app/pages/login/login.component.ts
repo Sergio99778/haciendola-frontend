@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -12,11 +12,20 @@ import { environment } from '../../../environments/environment';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginObj: Login;
 
   constructor(private http: HttpClient, private router: Router) {
     this.loginObj = new Login();
+  }
+
+  ngOnInit(): void {
+    const localToken = localStorage.getItem(
+      environment.auth_token_local_storage_key
+    );
+    if (localToken) {
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 
   onLogin() {
