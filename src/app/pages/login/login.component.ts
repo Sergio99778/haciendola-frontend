@@ -20,7 +20,6 @@ export class LoginComponent {
   }
 
   onLogin() {
-    console.log(this.loginObj);
     this.http
       .post(`${environment.api_base_url}/auth/login`, {
         email: this.loginObj.EmailId,
