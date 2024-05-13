@@ -28,36 +28,36 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="#">
             <div class="mb-3">
               <label for="productSKU" class="form-label">SKU</label>
-              <input type="number" class="form-control" id="productSKU" />
+              <input type="number" class="form-control" id="productSKU" [(ngModel)]="createProductObj.SKU" required name="SKU"/>
             </div>
             <div class="mb-3">
               <label for="productHandle" class="form-label">Handle</label>
-              <input type="text" class="form-control" id="productHandle" />
+              <input type="text" class="form-control" id="productHandle" [(ngModel)]="createProductObj.Handle" required name="Handle"/>
             </div>
             <div class="mb-3">
               <label for="productTitle" class="form-label">Title</label>
-              <input type="text" class="form-control" id="productTitle" />
+              <input type="text" class="form-control" id="productTitle" [(ngModel)]="createProductObj.Title" required name="Title"/>
             </div>
             <div class="mb-3">
               <label for="productDescription" class="form-label"
                 >Description</label
               >
-              <input type="text" class="form-control" id="productDescription" />
+              <input type="text" class="form-control" id="productDescription" [(ngModel)]="createProductObj.Description" required name="Description"/>
             </div>
             <div class="mb-3">
               <label for="productGrams" class="form-label">Grams</label>
-              <input type="number" class="form-control" id="productGrams" />
+              <input type="number" class="form-control" id="productGrams" [(ngModel)]="createProductObj.Grams" required name="Grams"/>
             </div>
             <div class="mb-3">
               <label for="productStock" class="form-label">Stock</label>
-              <input type="number" class="form-control" id="productStock" />
+              <input type="number" class="form-control" id="productStock" [(ngModel)]="createProductObj.Stock" required name="Stock"/>
             </div>
             <div class="mb-3">
               <label for="productPrice" class="form-label">Price</label>
-              <input type="number" class="form-control" id="productPrice" />
+              <input type="number" class="form-control" id="productPrice" [(ngModel)]="createProductObj.Price" required name="Price"/>
             </div>
             <div class="mb-3">
               <label for="productComparePrice" class="form-label"
@@ -67,11 +67,14 @@
                 type="number"
                 class="form-control"
                 id="productComparePrice"
+                [(ngModel)]="createProductObj.ComparePrice"
+                required
+                name="ComparePrice"
               />
             </div>
             <div class="mb-3">
               <label for="productBarcode" class="form-label">Barcode</label>
-              <input type="number" class="form-control" id="productBarcode" />
+              <input type="number" class="form-control" id="productBarcode" [(ngModel)]="createProductObj.Barcode" required name="Barcode"/>
             </div>
           </form>
         </div>
@@ -83,7 +86,7 @@
           >
             Close
           </button>
-          <button type="button" class="btn btn-primary" (click)="addProduct()">
+          <button type="button" class="btn btn-primary" (click)="addProduct()" data-bs-dismiss="modal">
             Save changes
           </button>
         </div>
@@ -103,6 +106,7 @@
         class="btn btn-primary"
         data-bs-toggle="modal"
         data-bs-target="#updateProductModal"
+        (click)="selectedProductToUpdate(product)"
       >
         Update
       </button>
@@ -131,15 +135,15 @@
               <form>
                 <div class="mb-3">
                   <label for="productSKU" class="form-label">SKU</label>
-                  <input type="number" class="form-control" id="productSKU" />
+                  <input type="number" class="form-control" id="productSKU" [(ngModel)]="updateProductObj.SKU" required name="SKU"/>
                 </div>
                 <div class="mb-3">
                   <label for="productHandle" class="form-label">Handle</label>
-                  <input type="text" class="form-control" id="productHandle" />
+                  <input type="text" class="form-control" id="productHandle" [(ngModel)]="updateProductObj.Handle" required name="Handle"/>
                 </div>
                 <div class="mb-3">
                   <label for="productTitle" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="productTitle" />
+                  <input type="text" class="form-control" id="productTitle" [(ngModel)]="updateProductObj.Title" required name="Title"/>
                 </div>
                 <div class="mb-3">
                   <label for="productDescription" class="form-label"
@@ -149,19 +153,22 @@
                     type="text"
                     class="form-control"
                     id="productDescription"
+                    [(ngModel)]="updateProductObj.Description"
+                    required
+                    name="Description"
                   />
                 </div>
                 <div class="mb-3">
                   <label for="productGrams" class="form-label">Grams</label>
-                  <input type="number" class="form-control" id="productGrams" />
+                  <input type="number" class="form-control" id="productGrams" [(ngModel)]="updateProductObj.Grams" required name="Grams"/>
                 </div>
                 <div class="mb-3">
                   <label for="productStock" class="form-label">Stock</label>
-                  <input type="number" class="form-control" id="productStock" />
+                  <input type="number" class="form-control" id="productStock" [(ngModel)]="updateProductObj.Stock" required name="Stock"/>
                 </div>
                 <div class="mb-3">
                   <label for="productPrice" class="form-label">Price</label>
-                  <input type="number" class="form-control" id="productPrice" />
+                  <input type="number" class="form-control" id="productPrice" [(ngModel)]="updateProductObj.Price" required name="Price"/>
                 </div>
                 <div class="mb-3">
                   <label for="productComparePrice" class="form-label"
@@ -171,6 +178,9 @@
                     type="number"
                     class="form-control"
                     id="productComparePrice"
+                    [(ngModel)]="updateProductObj.ComparePrice"
+                    required
+                    name="ComparePrice"
                   />
                 </div>
                 <div class="mb-3">
@@ -179,6 +189,9 @@
                     type="number"
                     class="form-control"
                     id="productBarcode"
+                    [(ngModel)]="updateProductObj.Barcode"
+                    required
+                    name="Barcode"
                   />
                 </div>
               </form>
@@ -194,7 +207,8 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="updateProduct(product)"
+                (click)="updateProduct()"
+                data-bs-dismiss="modal"
               >
                 Save changes
               </button>
@@ -247,6 +261,7 @@
                 type="button"
                 class="btn btn-danger"
                 (click)="deleteProduct(product.SKU)"
+                data-bs-dismiss="modal"
               >
                 Delete
               </button>

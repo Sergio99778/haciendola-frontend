@@ -28,7 +28,6 @@ export class LoginComponent {
       })
       .subscribe({
         next: (res: any) => {
-          console.log(res.access_token);
           if (res.access_token) {
             localStorage.setItem(
               environment.auth_token_local_storage_key,
